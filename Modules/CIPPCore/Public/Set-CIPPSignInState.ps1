@@ -7,7 +7,7 @@ function Set-CIPPSignInState {
         $APIName = 'Disable User Sign-in',
         $ExecutingUser
     )
-    0
+
     try {
         $body = @{
             accountEnabled = [bool]$AccountEnabled
@@ -20,3 +20,4 @@ function Set-CIPPSignInState {
         return "Could not disable $userid. Error: $($_.Exception.Message)"
     }
 }
+
