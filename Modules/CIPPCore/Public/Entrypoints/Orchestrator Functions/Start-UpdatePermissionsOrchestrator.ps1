@@ -10,12 +10,12 @@ function Start-UpdatePermissionsOrchestrator {
         Write-Information 'Updating Permissions'
 
         $PartnerTenant = @{
-            'customerId' = $env:TenantID
+            'customerId'        = $env:TenantID
             'defaultDomainName' = 'PartnerTenant'
-            'displayName' = '*Partner Tenant'
+            'displayName'       = '*Partner Tenant'
         }
 
-        $TenantList = Get-Tenants -IncludeAll | Where-Object { $_.Excluded -eq $false }
+        $TenantList = Get-Tenants -IncludeAll | Where-Object { $_.Excluded -eq $false -and $_.delegatedPrivilegeStatus -eq 'directTenant' }
 
         $Tenants = [System.Collections.Generic.List[object]]::new()
         foreach ($Tenant in $TenantList) {
